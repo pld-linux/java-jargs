@@ -10,7 +10,7 @@ Summary:	Java command line option parsing suite
 Summary(pl.UTF-8):	Biblioteka do analizy argumentów wiersza poleceń dla Javy
 Name:		java-jargs
 Version:	1.0
-Release:	0.1
+Release:	1
 License:	BSD
 Group:		Libraries/Java
 Source0:	http://downloads.sourceforge.net/project/jargs/jargs/1.0/jargs-%{version}.tar.bz2
