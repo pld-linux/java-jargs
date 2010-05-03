@@ -19,14 +19,8 @@ URL:		http://jargs.sourceforge.net/
 BuildRequires:	ant
 BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
-BuildRequires:	rpmbuild(macros) >= 1.300
-# for %%undos macro
-BuildRequires:	rpmbuild(macros) >= 1.553
-%if %{with source}
 BuildRequires:	rpmbuild(macros) >= 1.555
-%endif
 BuildRequires:	sed >= 4.0
-# for %{_javadir}
 Requires:	jpackage-utils
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
