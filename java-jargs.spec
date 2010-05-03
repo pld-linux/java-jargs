@@ -60,14 +60,10 @@ Kod źródłowy %{srcname}.
 
 %prep
 %setup -q -n %{srcname}-%{version}
-find -name '*.class'
+find -name '*.class' | xargs rm
 rm -rf docs/api
 
 %build
-export CLASSPATH
-
-export LC_ALL=en_US # source code not US-ASCII
-
 %ant
 
 %if %{with source}
