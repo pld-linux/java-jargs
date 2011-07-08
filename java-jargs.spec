@@ -1,11 +1,13 @@
+# TODO
+# - make without tests not to depend on junit (compile target is stupid)
 #
 # Conditional build:
 %bcond_without	javadoc		# don't build javadoc
 %bcond_without	source		# don't build source jar
-
-%include	/usr/lib/rpm/macros.java
+%bcond_without	tests		# don't build and run tests
 
 %define		srcname		jargs
+%include	/usr/lib/rpm/macros.java
 Summary:	Java command line option parsing suite
 Summary(pl.UTF-8):	Biblioteka do analizy argumentów wiersza poleceń dla Javy
 Name:		java-jargs
@@ -19,6 +21,7 @@ URL:		http://jargs.sourceforge.net/
 BuildRequires:	ant
 BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
+BuildRequires:	java-junit
 BuildRequires:	rpmbuild(macros) >= 1.555
 BuildRequires:	sed >= 4.0
 Requires:	jpackage-utils
@@ -64,7 +67,7 @@ find -name '*.class' | xargs rm
 rm -rf docs/api
 
 %build
-%ant
+%ant runtimejar %{?with_javadoc:javadoc} %{?with_tests:test}
 
 %if %{with source}
 %jar cf %{srcname}.src.jar -C src .
@@ -86,8 +89,10 @@ ln -s %{srcname}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{srcname} # ghost sym
 %endif
 
 # source
+%if %{with source}
 install -d $RPM_BUILD_ROOT%{_javasrcdir}
 cp -a %{srcname}.src.jar $RPM_BUILD_ROOT%{_javasrcdir}/%{srcname}.src.jar
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
