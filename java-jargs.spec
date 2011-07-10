@@ -1,5 +1,3 @@
-# TODO
-# - make without tests not to depend on junit (compile target is stupid)
 #
 # Conditional build:
 %bcond_without	javadoc		# don't build javadoc
@@ -15,15 +13,18 @@ Version:	1.0
 Release:	1
 License:	BSD
 Group:		Libraries/Java
-Source0:	http://downloads.sourceforge.net/project/jargs/jargs/1.0/jargs-%{version}.tar.bz2
+Source0:	http://downloads.sourceforge.net/jargs/jargs-%{version}.tar.bz2
 # Source0-md5:	9b86c8ebd69069a19e8424df2af349f0
+Patch0:		compile-test.patch
 URL:		http://jargs.sourceforge.net/
 BuildRequires:	ant
 BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
-BuildRequires:	java-junit
 BuildRequires:	rpmbuild(macros) >= 1.555
 BuildRequires:	sed >= 4.0
+%if %{with tests}
+BuildRequires:	java-junit
+%endif
 Requires:	jpackage-utils
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -63,6 +64,8 @@ Kod źródłowy %{srcname}.
 
 %prep
 %setup -q -n %{srcname}-%{version}
+%patch0 -p1
+
 find -name '*.class' | xargs rm
 rm -rf docs/api
 
