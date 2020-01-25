@@ -5,7 +5,6 @@
 %bcond_without	tests		# don't build and run tests
 
 %define		srcname		jargs
-%include	/usr/lib/rpm/macros.java
 Summary:	Java command line option parsing suite
 Summary(pl.UTF-8):	Biblioteka do analizy argumentów wiersza poleceń dla Javy
 Name:		java-jargs
