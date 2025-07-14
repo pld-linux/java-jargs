@@ -63,7 +63,7 @@ Kod źródłowy %{srcname}.
 
 %prep
 %setup -q -n %{srcname}-%{version}
-%patch0 -p1
+%patch -P0 -p1
 
 find -name '*.class' | xargs rm
 rm -rf docs/api
